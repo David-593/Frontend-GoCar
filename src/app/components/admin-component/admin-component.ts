@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-admin-component',
@@ -8,5 +9,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdminComponent {
-
+  
 }

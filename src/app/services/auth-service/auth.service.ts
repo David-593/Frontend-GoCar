@@ -10,7 +10,8 @@ export interface loginUserItf{
 
 export interface registerUserItf{
   cedula: string,
-  nombre: string, 
+  nombres: string,
+  apellidos: string,
   email: string,
   password: string,
   telefono?: string,
@@ -50,7 +51,4 @@ export class AuthService {
     return this.getToken() !== null;
   }
 
-  logout(): void{
-    return localStorage.removeItem('token');
-  }
 }
