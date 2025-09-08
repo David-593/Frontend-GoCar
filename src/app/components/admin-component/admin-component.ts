@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { stringify } from 'querystring';
 
 @Component({
@@ -10,4 +11,12 @@ import { stringify } from 'querystring';
 })
 export class AdminComponent {
   
+  constructor(private router: Router) { }
+  
+  logout() {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('token');
+    }
+    this.router.navigate(['/login']);
+  }
 }

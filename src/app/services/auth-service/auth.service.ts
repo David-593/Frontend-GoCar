@@ -8,16 +8,6 @@ export interface loginUserItf{
   password: string;
 }
 
-export interface registerUserItf{
-  cedula: string,
-  nombres: string,
-  apellidos: string,
-  email: string,
-  password: string,
-  telefono?: string,
-  redSocial?: string
-}
-
 export interface loginResponseToken{
   token: string;
 }
@@ -29,10 +19,6 @@ export class AuthService {
   private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
-
-  register(userRegister: registerUserItf): Observable<any> {
-    return this.http.post(`${this.apiUrl}/api/auth/register`, userRegister);
-  }
 
   login(userLogin: loginUserItf): Observable<loginResponseToken> {
     return this.http

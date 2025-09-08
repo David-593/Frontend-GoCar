@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '@app/services/auth-service/auth.service';
+import { RegisterService, registerUserItf } from '../../services/register-service/register.service';
 
 @Component({
   selector: 'app-register-user-component',
@@ -21,7 +21,7 @@ export class RegisterUserComponent {
   redSocial: string = '';
   errorMsg: string = '';
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private userService: RegisterService, private router: Router) { }
 
   register() {
     const newUser = {
@@ -34,7 +34,7 @@ export class RegisterUserComponent {
       redSocial: this.redSocial ? this.redSocial : undefined
     }
 
-    this.authService.register(newUser).subscribe({
+    this.userService.register(newUser).subscribe({
       next: (response) => {
         console.log('User registered successfully:', response);
         this.router.navigate(['/login']);
