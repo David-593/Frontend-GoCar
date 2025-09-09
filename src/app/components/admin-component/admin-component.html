@@ -1,2 +1,28 @@
 <p>Pantalla de admin!</p>
 <button (click)="logout()">Logout</button>
+<h2>Panel de Administración</h2>
+
+<form (ngSubmit)="buscarUsuario()">
+	<label for="cedula">Buscar usuario por cédula:</label>
+	<input id="cedula" name="cedula" [(ngModel)]="cedula" [attr.key]="usuario?.cedula || ''">
+	<button type="submit">Buscar</button>
+
+</form>
+
+<div *ngIf="successMsg" style="color: green; margin-top: 10px;">
+	{{ successMsg }}
+</div>
+<div *ngIf="errorMsg" style="color: red; margin-top: 10px;">
+	{{ errorMsg }}
+</div>
+
+<div *ngIf="usuario && usuario.cedula">
+	<h3>Datos del usuario</h3>
+	<p><strong>Cédula:</strong> {{ usuario.cedula }}</p>
+	<p><strong>Nombre:</strong> {{ usuario.nombres }}</p>
+	<p><strong>Apellido:</strong> {{ usuario.apellidos }}</p>
+	<p><strong>Email:</strong> {{ usuario.email }}</p>
+	<p><strong>Teléfono:</strong> {{ usuario.telefono }}</p>
+	<p><strong>Red Social:</strong> {{ usuario.redSocial }}</p>
+	<button (click)="eliminarUsuario()">Eliminar usuario</button>
+</div>

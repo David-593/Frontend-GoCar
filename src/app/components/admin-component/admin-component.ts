@@ -1,18 +1,62 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { stringify } from 'querystring';
+import { FormsModule } from '@angular/forms';
+import { AdminService } from '../../services/admin-service/admin.service';
 
 @Component({
   selector: 'app-admin-component',
-  imports: [],
+  imports: [CommonModule, FormsModule],
   templateUrl: './admin-component.html',
   styleUrl: './admin-component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdminComponent {
-  
-  constructor(private router: Router) { }
-  
+  cedula: string = '';
+  usuario: any = null;
+  successMsg: string = '';
+  errorMsg: string = '';
+
+  constructor(private router: Router, private adminService: AdminService, private cdr: ChangeDetectorRef) { }
+
+  buscarUsuario() {
+    this.successMsg = '';
+    this.errorMsg = '';
+    this.usuario = null; // Limpia el usuario antes de buscar uno nuevo
+    if (!this.cedula) {
+      this.errorMsg = 'Ingresa una cédula para buscar.';
+      return;
+    }
+    this.adminService.getUserByCedula(this.cedula).subscribe({
+      next: (user) => {
+        this.usuario = user;
+        this.successMsg = 'Usuario encontrado.';
+        this.cedula = '';
+        this.cdr.markForCheck();
+      },
+      error: (err) => {
+        this.errorMsg = 'No se encontró el usuario o no tienes permisos.';
+        if (err?.error?.message === 'Usuario no encontrado' || err?.status === 404) {
+          this.usuario = null;
+        }
+      }
+    });
+  }
+
+  eliminarUsuario() {
+    if (!this.usuario || !this.usuario.cedula) return;
+    this.adminService.deleteUserByCedula(this.usuario.cedula).subscribe({
+      next: () => {
+        this.successMsg = 'Usuario eliminado correctamente.';
+        this.usuario = null;
+        // No borres la cédula, así puedes buscar otro usuario directamente
+      },
+      error: (err) => {
+        this.errorMsg = 'Error al eliminar el usuario o no tienes permisos.';
+      }
+    });
+  }
+
   logout() {
     if (typeof window !== 'undefined') {
       localStorage.removeItem('token');
