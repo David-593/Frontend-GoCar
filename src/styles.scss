@@ -1,1 +1,101 @@
-/* You can add global styles to this file, and also import other style files */
+
+
+
+
+
+
+html, body {
+  height: 100%;
+  background: #181a1b !important;
+  color: #fff !important;
+  font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+}
+
+
+
+input, select, textarea {
+  background: #23272a !important;
+  color: #fff !important;
+  border: 1px solid #3949ab;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+button {
+  background: #3949ab !important;
+  color: #fff !important;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+button:hover {
+  background: #1e88e5 !important;
+  color: #fff !important;
+}
+
+label {
+  color: #1e88e5 !important;
+  font-weight: 500;
+}
+
+h2, h3 {
+  color: #1e88e5 !important;
+  font-weight: 700;
+}
+
+div[style*="color: green"] {
+  color: #43a047 !important;
+  font-weight: 600;
+}
+div[style*="color: red"] {
+  color: #e53935 !important;
+  font-weight: 600;
+}
+
+input, select, textarea {
+  background: #23272a;
+  color: #fff;
+  border: 1px solid #3949ab;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+button {
+  background: #3949ab;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+button:hover {
+  background: #1e88e5;
+  color: #fff;
+}
+
+label {
+  color: #1e88e5;
+  font-weight: 500;
+}
+
+h2, h3 {
+  color: #1e88e5;
+  font-weight: 700;
+}
+
+div[style*="color: green"] {
+  color: #43a047 !important;
+  font-weight: 600;
+}
+div[style*="color: red"] {
+  color: #e53935 !important;
+  font-weight: 600;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

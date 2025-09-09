@@ -10,7 +10,16 @@ import { Router, RouterModule } from '@angular/router';
   styleUrl: './user-component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class UserComponent {
+  usuario: any = {
+    cedula: '1234567890',
+    nombres: 'Juan',
+    apellidos: 'Pérez',
+    telefono: '0999999999',
+    email: 'juan.perez@email.com',
+    redSocial: '@juanperez'
+  };
 
   constructor(private router: Router) { }
 

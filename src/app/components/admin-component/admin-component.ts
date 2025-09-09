@@ -17,6 +17,9 @@ export class AdminComponent {
   successMsg: string = '';
   errorMsg: string = '';
 
+  menuOpen: boolean = true;
+  showBuscarUsuario: boolean = true;
+
   constructor(private router: Router, private adminService: AdminService, private cdr: ChangeDetectorRef) { }
 
   buscarUsuario() {

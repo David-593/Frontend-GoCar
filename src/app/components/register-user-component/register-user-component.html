@@ -1,27 +1,40 @@
-<p>register-user-component works!</p>
-<form (ngSubmit)="register()">
-    <label for="cedula">Cédula:</label>
-    <input id="cedula" [(ngModel)]="cedula" name="cedula" required>
 
-    <label for="nombres">Nombre:</label>
-    <input id="nombres" [(ngModel)]="nombres" name="nombres" required>
+<div class="register-container">
+    <form (ngSubmit)="register()" class="register-form">
+        <div class="register-header">
+            <span class="register-icon">
+                <svg width="38" height="38" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="#1e88e5"/><path d="M8 12v-2a4 4 0 1 1 8 0v2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="7" y="12" width="10" height="7" rx="2" fill="#fff"/></svg>
+            </span>
+            <span class="register-title">Registro de usuario</span>
+        </div>
+        <div class="register-fields">
+            <div class="register-col">
+                <label for="cedula">Cédula</label>
+                <input id="cedula" [(ngModel)]="cedula" name="cedula" required>
+                <label for="nombres">Nombre</label>
+                <input id="nombres" [(ngModel)]="nombres" name="nombres" required>
+                <label for="apellidos">Apellidos</label>
+                <input id="apellidos" [(ngModel)]="apellidos" name="apellidos" required>
+                <label for="telefono">Teléfono</label>
+                <input id="telefono" [(ngModel)]="telefono" name="telefono">
+            </div>
+            <div class="register-col">
+                <label for="email">Email</label>
+                <input id="email" [(ngModel)]="email" name="email" required>
+                <label for="password">Contraseña</label>
+                <input id="password" [(ngModel)]="password" name="password" type="password" required>
+                <label for="redSocial">Red Social</label>
+                <input id="redSocial" [(ngModel)]="redSocial" name="redSocial">
+            </div>
+        </div>
 
-    <label for="apellidos">Apellidos:</label>
-    <input id="apellidos" [(ngModel)]="apellidos" name="apellidos" required>
+            <button type="submit" class="register-btn">Registrarse</button>
+            <div *ngIf="errorMsg" class="register-error">{{ errorMsg }}</div>
+            <div class="register-login">
+                ¿Ya tienes cuenta?
+                <a routerLink="/login">Inicia sesión aquí</a>
+            </div>
+        </form>
+    </div>
 
-    <label for="email">Email:</label>
-    <input id="email" [(ngModel)]="email" name="email" required>
 
-    <label for="password">Contraseña:</label>
-    <input id="password" [(ngModel)]="password" name="password" type="password" required>
-
-    <label for="telefono">Teléfono:</label>
-    <input id="telefono" [(ngModel)]="telefono" name="telefono">
-
-    <label for="redSocial">Red Social:</label>
-    <input id="redSocial" [(ngModel)]="redSocial" name="redSocial">
-
-    <button type="submit">Register</button>
-
-</form>
-<div *ngIf="errorMsg" style="color:red">{{ errorMsg }}</div>

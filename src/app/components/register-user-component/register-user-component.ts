@@ -4,9 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterService, registerUserItf } from '../../services/register-service/register.service';
 
+import { RouterLink } from '@angular/router';
+
 @Component({
   selector: 'app-register-user-component',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './register-user-component.html',
   styleUrl: './register-user-component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

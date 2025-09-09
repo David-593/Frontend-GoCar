@@ -1,16 +1,150 @@
-<form (ngSubmit)="login()" style="max-width: 350px; margin: auto; display: flex; flex-direction: column; gap: 1rem;">
-	<h2>Iniciar sesión</h2>
-	<label for="email">Email:</label>
-	<input id="email" [(ngModel)]="email" name="email" required type="email" placeholder="Correo electrónico">
 
-	<label for="password">Contraseña:</label>
-	<input id="password" [(ngModel)]="password" name="password" type="password" required placeholder="Contraseña">
+<div class="login-container">
+	<form (ngSubmit)="login()" class="login-form">
+		<div class="login-header">
+			<span class="login-icon">
+				<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<circle cx="12" cy="12" r="12" fill="#1e88e5"/>
+					<rect x="7" y="10" width="10" height="7" rx="2" fill="#fff"/>
+					<rect x="10" y="13" width="4" height="2" rx="1" fill="#1e88e5"/>
+					<rect x="10.75" y="11.5" width="2.5" height="2.5" rx="1.25" fill="#1e88e5"/>
+				</svg>
+			</span>
+			<span class="login-title">Iniciar sesión</span>
+			<a routerLink="/" class="home-btn" title="Volver al Home">
+				<span class="home-icon-bg">
+					<svg width="28" height="28" viewBox="0 0 24 24" fill="none" style="vertical-align: middle;">
+						<circle cx="12" cy="12" r="12" fill="#1e88e5"/>
+						<path d="M3 11.5L12 4L21 11.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						<rect x="6" y="11.5" width="12" height="7.5" rx="2" fill="#23272a" stroke="#fff" stroke-width="2"/>
+					</svg>
+				</span>
+			</a>
+		</div>
+		<div class="login-field">
+			<label for="email">Email</label>
+			<input id="email" [(ngModel)]="email" name="email" required type="email" placeholder="Correo electrónico">
+		</div>
+		<div class="login-field">
+			<label for="password">Contraseña</label>
+			<input id="password" [(ngModel)]="password" name="password" type="password" required placeholder="Contraseña">
+		</div>
+		<button type="submit" class="login-btn">Entrar</button>
+		<div *ngIf="errorMsg" class="login-error">{{ errorMsg }}</div>
+		<div class="login-register">
+			¿No tienes cuenta?
+			<a routerLink="/register">Regístrate aquí</a>
+		</div>
+	</form>
+</div>
 
-	<button type="submit">Login</button>
-	<div *ngIf="errorMsg" style="color:red">{{ errorMsg }}</div>
-	<div style="margin-top: 1rem; text-align: center;">
-		¿No tienes cuenta?
-		<a routerLink="/register" style="color: #007bff; text-decoration: underline; cursor: pointer;">Regístrate aquí</a>
-	</div>
-</form>
+<style>
+.login-container {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #181a1b;
+}
+.home-btn {
+	margin-left: auto;
+	margin-right: 0;
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0 0 0 1rem;
+	display: flex;
+	align-items: center;
+	transition: opacity 0.2s;
+	opacity: 0.8;
+}
+.home-btn:hover {
+	opacity: 1;
+}
+.login-form {
+	background: #23272a;
+	padding: 2.5rem 2rem;
+	border-radius: 16px;
+	box-shadow: 0 4px 24px rgba(0,0,0,0.7);
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	min-width: 340px;
+	max-width: 370px;
+}
+.login-header {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	justify-content: center;
+	margin-bottom: 0.5rem;
+}
+.login-icon {
+	display: flex;
+	align-items: center;
+}
+.login-title {
+	font-size: 2rem;
+	color: #fff;
+	font-weight: 700;
+	letter-spacing: 1px;
+}
+.login-field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+.login-field label {
+	color: #90caf9;
+	font-weight: 500;
+	font-size: 1rem;
+}
+.login-field input {
+	background: #181a1b;
+	color: #fff;
+	border: 1px solid #3949ab;
+	border-radius: 6px;
+	padding: 10px 12px;
+	font-size: 1rem;
+	outline: none;
+	transition: border 0.2s;
+}
+.login-field input:focus {
+	border-color: #1e88e5;
+}
+.login-btn {
+	background: linear-gradient(90deg, #1e88e5 60%, #3949ab 100%);
+	color: #fff;
+	border: none;
+	border-radius: 6px;
+	padding: 12px 0;
+	font-size: 1.1rem;
+	font-weight: 600;
+	cursor: pointer;
+	box-shadow: 0 2px 8px rgba(30,136,229,0.15);
+	transition: background 0.2s;
+}
+.login-btn:hover {
+	background: linear-gradient(90deg, #3949ab 60%, #1e88e5 100%);
+}
+.login-error {
+	color: #e53935;
+	background: #212121;
+	border-radius: 4px;
+	padding: 8px;
+	text-align: center;
+	font-weight: 500;
+}
+.login-register {
+	text-align: center;
+	color: #90caf9;
+	font-size: 1rem;
+}
+.login-register a {
+	color: #1e88e5;
+	text-decoration: underline;
+	font-weight: 600;
+	margin-left: 4px;
+}
+</style>
 
