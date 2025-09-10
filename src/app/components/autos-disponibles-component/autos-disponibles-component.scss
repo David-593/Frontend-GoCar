@@ -1,0 +1,21 @@
+h2 {
+  color: #1e88e5;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+li {
+  background: #23272a;
+  color: #fff;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  font-size: 1.1rem;
+}
+div[style*="color: red"] {
+  color: #e53935 !important;
+  font-weight: 600;
+}
