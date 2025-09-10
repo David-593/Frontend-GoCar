@@ -1,16 +1,23 @@
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 export interface AutoItf {
-  cedula?: string;
-  marca?: string;
-  modelo?: string;
-  anio?: number;
-  precio?: number;
-  // otros campos según tu backend
+  id?: number;
+  vendedorCedula: string;
+  marca: string;
+  modelo: string;
+  year: number;
+  precio: number;
+  kilometraje: number;
+  color: string;
+  descripcion: string;
+  imagen?: File;
+  imagenUrl?: string;
+  estado?: 'DISPONIBLE' | 'VENDIDO';
+  contacto: string;
+  fechaPublicacion?: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -27,20 +34,28 @@ export class AutoService {
   addAuto(data: AutoItf, imagen: File): Observable<any> {
     const headers = this.getAuthHeaders();
     const formData = new FormData();
-    Object.entries(data).forEach(([key, value]) => {
-      if (value !== undefined) {
-        formData.append(key, value as string | Blob);
-      }
-    });
+    // Enviar todos los campos requeridos con nombres exactos
+    formData.append('vendedorCedula', data.vendedorCedula);
+    formData.append('marca', data.marca);
+    formData.append('modelo', data.modelo);
+    formData.append('year', data.year.toString());
+    formData.append('precio', data.precio.toString());
+    formData.append('kilometraje', data.kilometraje.toString());
+    formData.append('color', data.color);
+    formData.append('descripcion', data.descripcion);
+    formData.append('contacto', data.contacto);
+    if (data.estado) {
+      formData.append('estado', data.estado);
+    }
     if (imagen) {
       formData.append('imagen', imagen);
     }
     return this.http.post(`${this.apiUrl}/api/auto/add`, formData, { headers });
   }
 
-  getMisAutos(cedula: string): Observable<any> {
+  getMisAutos(): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http.get(`${this.apiUrl}/api/auto/mis-autos/${cedula}`, { headers });
+    return this.http.get(`${this.apiUrl}/api/auto/mis-autos`, { headers });
   }
 
   venderAuto(id: string): Observable<any> {

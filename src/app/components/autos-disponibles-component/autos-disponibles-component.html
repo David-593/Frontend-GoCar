@@ -2,7 +2,7 @@
 <div *ngIf="errorMsg" style="color: red; margin-bottom: 10px;">{{ errorMsg }}</div>
 <ul *ngIf="autos.length">
   <li *ngFor="let auto of autos">
-    <strong>{{ auto.marca }} {{ auto.modelo }} ({{ auto.anio }})</strong> - ${{ auto.precio }}
+  <strong>{{ auto.marca }} {{ auto.modelo }} ({{ auto.year }})</strong> - ${{ auto.precio }}
   </li>
 </ul>
 <div *ngIf="!autos.length && !errorMsg">No hay autos disponibles.</div>

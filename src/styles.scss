@@ -6,16 +6,16 @@
 
 html, body {
   height: 100%;
-  background: #181a1b !important;
-  color: #fff !important;
+  background: #fff !important;
+  color: #23272a !important;
   font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
 }
 
 
 
 input, select, textarea {
-  background: #23272a !important;
-  color: #fff !important;
+  background: #fff !important;
+  color: #23272a !important;
   border: 1px solid #3949ab;
   border-radius: 4px;
   padding: 8px;
@@ -56,11 +56,16 @@ div[style*="color: red"] {
 }
 
 input, select, textarea {
-  background: #23272a;
-  color: #fff;
+  background: #fff;
+  color: #23272a;
   border: 1px solid #3949ab;
   border-radius: 4px;
   padding: 8px;
+}
+/* Navbar negro, texto blanco */
+.navbar, nav {
+  background: #23272a !important;
+  color: #fff !important;
 }
 
 button {

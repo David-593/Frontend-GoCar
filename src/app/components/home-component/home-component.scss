@@ -1,3 +1,61 @@
+.autos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.auto-card {
+  background: #23272a;
+  color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  padding: 1.5rem 1rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.2s;
+}
+.auto-card:hover {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+}
+.auto-img {
+  width: 100%;
+  max-width: 320px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #444;
+  margin-bottom: 1rem;
+}
+.auto-info {
+  width: 100%;
+  text-align: center;
+}
+.auto-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.auto-price {
+  font-size: 1.1rem;
+  color: #ffd54f;
+  margin-bottom: 1rem;
+}
+.auto-btn {
+  background: #3949ab;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.2s;
+}
+.auto-btn:hover {
+  background: #283593;
+}
 nav {
   font-size: 1.1rem;
 }

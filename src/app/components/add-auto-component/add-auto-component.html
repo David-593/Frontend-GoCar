@@ -1,16 +1,31 @@
 <h2>Agregar Auto</h2>
 <form (ngSubmit)="addAuto()">
+  <label for="vendedorCedula">Cédula del vendedor:</label>
+  <input id="vendedorCedula" name="vendedorCedula" [(ngModel)]="vendedorCedula" required>
+
   <label for="marca">Marca:</label>
   <input id="marca" name="marca" [(ngModel)]="marca" required>
 
   <label for="modelo">Modelo:</label>
   <input id="modelo" name="modelo" [(ngModel)]="modelo" required>
 
-  <label for="anio">Año:</label>
-  <input id="anio" name="anio" [(ngModel)]="anio" type="number" required>
+  <label for="año">Año:</label>
+  <input id="año" name="año" [ngModel]="this['año']" (ngModelChange)="this['año'] = $event" type="number" required>
 
   <label for="precio">Precio:</label>
   <input id="precio" name="precio" [(ngModel)]="precio" type="number" required>
+
+  <label for="kilometraje">Kilometraje:</label>
+  <input id="kilometraje" name="kilometraje" [(ngModel)]="kilometraje" type="number" required>
+
+  <label for="color">Color:</label>
+  <input id="color" name="color" [(ngModel)]="color" required>
+
+  <label for="descripcion">Descripción:</label>
+  <textarea id="descripcion" name="descripcion" [(ngModel)]="descripcion" required></textarea>
+
+  <label for="contacto">Contacto:</label>
+  <input id="contacto" name="contacto" [(ngModel)]="contacto" required>
 
   <label for="imagen">Imagen:</label>
   <input id="imagen" name="imagen" type="file" (change)="onFileChange($event)" required>
