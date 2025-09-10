@@ -1,0 +1,22 @@
+<h2>Agregar Auto</h2>
+<form (ngSubmit)="addAuto()">
+  <label for="marca">Marca:</label>
+  <input id="marca" name="marca" [(ngModel)]="marca" required>
+
+  <label for="modelo">Modelo:</label>
+  <input id="modelo" name="modelo" [(ngModel)]="modelo" required>
+
+  <label for="anio">Año:</label>
+  <input id="anio" name="anio" [(ngModel)]="anio" type="number" required>
+
+  <label for="precio">Precio:</label>
+  <input id="precio" name="precio" [(ngModel)]="precio" type="number" required>
+
+  <label for="imagen">Imagen:</label>
+  <input id="imagen" name="imagen" type="file" (change)="onFileChange($event)" required>
+
+  <button type="submit">Agregar</button>
+
+  <div *ngIf="successMsg" style="color: green; margin-top: 10px;">{{ successMsg }}</div>
+  <div *ngIf="errorMsg" style="color: red; margin-top: 10px;">{{ errorMsg }}</div>
+</form>
