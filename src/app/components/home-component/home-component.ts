@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AutoService, AutoItf } from '../../services/auto-service/auto.service';
 import { environment } from '../../../environments/environment';
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, RouterModule]
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit, OnDestroy {
   getImagenUrl(imagenUrl?: string): string {
     if (!imagenUrl) return '';
     if (imagenUrl.startsWith('http')) return imagenUrl;
@@ -27,11 +27,34 @@ export class HomeComponent {
   }
   autos: AutoItf[] = [];
   errorMsg: string = '';
+  loading: boolean = false;
 
+  private tokenListener: any;
   constructor(private autoService: AutoService, private router: Router) {}
 
+  private lastToken: string | null = null;
   ngOnInit() {
-    this.autoService.getAutosDisponibles().subscribe({
+    this.cargarAutos();
+    // Escuchar cambios en el token para recargar autos al login/logout
+    this.lastToken = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    this.tokenListener = setInterval(() => {
+      const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+      if (token !== this.lastToken) {
+        this.lastToken = token;
+        this.cargarAutos();
+      }
+    }, 1000);
+  }
+
+  ngOnDestroy() {
+    if (this.tokenListener) {
+      clearInterval(this.tokenListener);
+    }
+  }
+
+  cargarAutos() {
+    this.loading = true;
+    this.autoService.getAllAutos().subscribe({
       next: (data) => {
         if (Array.isArray(data)) {
           this.autos = data;
@@ -41,24 +64,23 @@ export class HomeComponent {
           this.autos = [];
         }
         this.errorMsg = '';
+        this.loading = false;
       },
       error: () => {
         this.errorMsg = 'Error al obtener autos disponibles.';
+        this.loading = false;
       }
     });
   }
 
   verDetalle(auto: AutoItf) {
-    // Si no está logeado, redirige a login
+    const id = (auto as any)._id || (auto as any).id;
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
     if (!token) {
+      localStorage.setItem('pendingAutoObj', JSON.stringify(auto));
       this.router.navigate(['/login']);
       return;
     }
-    // Aquí podrías navegar a una ruta de detalle, por ejemplo /auto/:id
-    const id = (auto as any)._id || (auto as any).id;
-    if (id) {
-      this.router.navigate(['/auto', id]);
-    }
+    this.router.navigate(['/auto', id], { state: { auto } });
   }
 }

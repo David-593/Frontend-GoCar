@@ -33,6 +33,14 @@ export class AuthComponent {
     const tokenJson = JSON.parse(tokenTexto);
     const role = (tokenJson.rol || '').toLowerCase().trim();
     console.log('Valor normalizado de rol:', role);
+    const pendingAutoObj = typeof window !== 'undefined' ? localStorage.getItem('pendingAutoObj') : null;
+    if (pendingAutoObj) {
+      localStorage.removeItem('pendingAutoObj');
+      const auto = JSON.parse(pendingAutoObj);
+      const id = (auto as any)._id || (auto as any).id;
+      this.router.navigate(['/auto', id], { state: { auto } });
+      return;
+    }
     if (role === 'admin') {
       console.log('Entró en admin');
       this.router.navigate(['/admin']);
@@ -52,6 +60,10 @@ export class AuthComponent {
   }
 
   login() {
+    if (!this.email || !this.password) {
+      this.errorMsg = 'Debes ingresar email y contraseña.';
+      return;
+    }
     const user: loginUserItf = { email: this.email, password: this.password };
     this.authService.login(user).subscribe({
       next: (res) => {

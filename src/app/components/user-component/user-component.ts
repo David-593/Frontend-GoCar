@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { AutoService, AutoItf } from '../../services/auto-service/auto.service';
 
 @Component({
   selector: 'app-user-component',
@@ -11,17 +12,63 @@ import { Router, RouterModule } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class UserComponent {
-  usuario: any = {
-    cedula: '1234567890',
-    nombres: 'Juan',
-    apellidos: 'Pérez',
-    telefono: '0999999999',
-    email: 'juan.perez@email.com',
-    redSocial: '@juanperez'
-  };
+export class UserComponent implements OnInit {
+  showMenu = false;
+  autos: AutoItf[] = [];
+  errorMsg: string = '';
+  loading = true;
 
-  constructor(private router: Router) { }
+  private tokenListener: any;
+  private lastToken: string | null = null;
+  constructor(private router: Router, private autoService: AutoService) { }
+
+  ngOnInit() {
+    this.cargarAutos();
+    this.lastToken = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    this.tokenListener = setInterval(() => {
+      const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+      if (token !== this.lastToken) {
+        this.lastToken = token;
+        this.cargarAutos();
+      }
+    }, 1000);
+  }
+
+  ngOnDestroy() {
+    if (this.tokenListener) {
+      clearInterval(this.tokenListener);
+    }
+  }
+
+  cargarAutos() {
+    this.loading = true;
+    this.autoService.getAllAutos().subscribe({
+      next: (data) => {
+        if (Array.isArray(data)) {
+          this.autos = data;
+        } else if (data && Array.isArray(data.autos)) {
+          this.autos = data.autos;
+        } else {
+          this.autos = [];
+        }
+        this.loading = false;
+      },
+      error: () => {
+        this.errorMsg = 'Error al obtener autos.';
+        this.loading = false;
+      }
+    });
+  }
+
+  getImagenUrl(imagenUrl?: string): string {
+    if (!imagenUrl) return '';
+    if (imagenUrl.startsWith('http')) return imagenUrl;
+    let cleanUrl = imagenUrl.replace(/^(uploads[\/])+/, '').replace(/\\/g, '/');
+    while (cleanUrl.startsWith('uploads/')) {
+      cleanUrl = cleanUrl.replace(/^uploads\//, '');
+    }
+    return `http://localhost:4000/uploads/${cleanUrl}`;
+  }
 
   logout() {
     if (typeof window !== 'undefined') {

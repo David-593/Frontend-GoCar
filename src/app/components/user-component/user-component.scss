@@ -1,0 +1,179 @@
+.menu-btn {
+	position: fixed;
+	top: 24px;
+	left: 24px;
+	z-index: 1002;
+	background: #fff;
+	border: none;
+	font-size: 1.6rem;
+	cursor: pointer;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+	border-radius: 6px;
+	width: 38px;
+	height: 38px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: box-shadow 0.2s;
+}
+.sidebar-menu {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	height: 100vh;
+	position: relative;
+}
+.sidebar-options {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	align-items: flex-start;
+	justify-content: flex-end;
+	flex: 1;
+	width: 100%;
+	position: absolute;
+	bottom: 32px;
+	left: 32px;
+}
+.sidebar-container {
+	position: relative;
+	z-index: 10;
+}
+.menu-btn {
+	background: none;
+	border: none;
+	font-size: 2rem;
+	color: #23272a;
+	cursor: pointer;
+	margin-bottom: 1rem;
+}
+.menu-icon {
+	font-size: 2.2rem;
+}
+.sidebar-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 340px;
+	height: 100vh;
+	background: rgba(30, 30, 30, 0.98);
+	z-index: 1000;
+	display: none;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+	box-shadow: 2px 0 12px rgba(0,0,0,0.12);
+}
+.sidebar-overlay.open {
+	display: flex;
+}
+.sidebar-menu {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	align-items: flex-start;
+	margin-top: 48px;
+	margin-left: 32px;
+}
+.sidebar-menu button {
+	background: #3949ab;
+	color: #fff;
+	border: none;
+	border-radius: 8px;
+	padding: 18px 40px;
+	font-size: 1.3rem;
+	cursor: pointer;
+	transition: background 0.2s;
+	min-width: 220px;
+}
+.sidebar-menu button:hover {
+	background: #283593;
+}
+.close-btn {
+	background: none;
+	color: #fff;
+	font-size: 2.5rem;
+	border: none;
+	position: absolute;
+	top: 32px;
+	right: 48px;
+	cursor: pointer;
+}
+.sidebar-menu button {
+	background: #3949ab;
+	color: #fff;
+	border: none;
+	border-radius: 6px;
+	padding: 10px 18px;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+.sidebar-menu button:hover {
+	background: #283593;
+}
+.autos-usuario-main {
+	max-width: 1200px;
+	margin: 2rem auto;
+	padding: 2rem;
+	background: #fff;
+	border-radius: 12px;
+	box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.autos-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	gap: 2rem;
+	margin-top: 2rem;
+}
+.auto-card {
+	background: #fff;
+	color: #23272a;
+	border-radius: 12px;
+	box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+	padding: 1.5rem 1rem 1rem 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	transition: box-shadow 0.2s;
+}
+.auto-card:hover {
+	box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+}
+.auto-img {
+	width: 100%;
+	max-width: 320px;
+	height: 200px;
+	object-fit: cover;
+	border-radius: 8px;
+	border: 1px solid #444;
+	margin-bottom: 1rem;
+}
+.auto-info {
+	width: 100%;
+	text-align: center;
+}
+.auto-title {
+	font-size: 1.2rem;
+	font-weight: bold;
+	margin-bottom: 0.5rem;
+}
+.auto-price {
+	font-size: 1.1rem;
+	color: #ffd54f;
+	margin-bottom: 1rem;
+}
+.auto-btn {
+	background: #3949ab;
+	color: #fff;
+	border: none;
+	border-radius: 6px;
+	padding: 10px 24px;
+	font-size: 1rem;
+	cursor: pointer;
+	margin-top: 0.5rem;
+	transition: background 0.2s;
+}
+.auto-btn:hover {
+	background: #283593;
+}

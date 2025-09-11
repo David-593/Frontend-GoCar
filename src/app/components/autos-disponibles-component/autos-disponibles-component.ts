@@ -16,7 +16,7 @@ export class AutosDisponiblesComponent implements OnInit {
   constructor(private autoService: AutoService) {}
 
   ngOnInit() {
-    this.autoService.getAutosDisponibles().subscribe({
+  this.autoService.getAllAutos().subscribe({
       next: (data) => {
         if (Array.isArray(data)) {
           this.autos = data;
@@ -28,7 +28,7 @@ export class AutosDisponiblesComponent implements OnInit {
         this.errorMsg = '';
       },
       error: () => {
-        this.errorMsg = 'Error al obtener autos disponibles.';
+  this.errorMsg = 'Error al obtener autos.';
       }
     });
   }

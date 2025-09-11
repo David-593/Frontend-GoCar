@@ -1,0 +1,23 @@
+<nav class="user-navbar">
+  <button routerLink="/homeUser">Perfil</button>
+  <button routerLink="/addAuto">Agregar auto</button>
+  <button routerLink="/misAutos">Mis autos</button>
+  <button routerLink="/updateUser">Actualizar datos</button>
+  <button routerLink="/logout">Cerrar sesión</button>
+</nav>
+<main class="autos-usuario-main">
+  <h2>Todos los autos</h2>
+  <div *ngIf="loading" class="loading">Cargando autos...</div>
+  <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
+  <div class="autos-grid" *ngIf="autos.length">
+    <div class="auto-card" *ngFor="let auto of autos">
+      <img *ngIf="auto.imagenUrl" [src]="getImagenUrl(auto.imagenUrl)" alt="Imagen del auto" class="auto-img" />
+      <div class="auto-info">
+        <div class="auto-title">{{ auto.marca }} {{ auto.modelo }} ({{ auto.year }})</div>
+        <div class="auto-price">${{ auto.precio }}</div>
+        <button [routerLink]="['/auto', auto.id || auto.id]" class="auto-btn">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!autos.length && !errorMsg">No hay autos disponibles.</div>
+</main>

@@ -22,6 +22,9 @@ export interface AutoItf {
 
 @Injectable({ providedIn: 'root' })
 export class AutoService {
+  getAutoById(id: string): Observable<AutoItf> {
+    return this.http.get<AutoItf>(`${this.apiUrl}/api/auto/${id}`);
+  }
   private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
@@ -63,7 +66,7 @@ export class AutoService {
     return this.http.patch(`${this.apiUrl}/api/auto/vender/${id}`, {}, { headers });
   }
 
-  getAutosDisponibles(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/api/auto/disponibles`);
+  getAllAutos(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/api/auto`);
   }
 }

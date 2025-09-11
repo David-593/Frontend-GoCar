@@ -1,0 +1,19 @@
+<div class="auto-detail-container">
+  <div *ngIf="loading" class="loading">Cargando...</div>
+  <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
+  <div *ngIf="auto" class="auto-detail-card">
+    <img *ngIf="auto.imagenUrl" [src]="getImagenUrl(auto.imagenUrl)" alt="Imagen del auto" class="auto-detail-img" />
+    <div class="auto-detail-info">
+      <h2>{{ auto.marca }} {{ auto.modelo }} ({{ auto.year }})</h2>
+      <div class="auto-detail-price">${{ auto.precio }}</div>
+      <div class="auto-detail-desc">{{ auto.descripcion }}</div>
+      <div class="auto-detail-extra">
+        <span><strong>Kilometraje:</strong> {{ auto.kilometraje }} km</span>
+        <span><strong>Color:</strong> {{ auto.color }}</span>
+        <span><strong>Vendedor:</strong> {{ auto.vendedorCedula }}</span>
+        <span><strong>Contacto:</strong> {{ auto.contacto }}</span>
+      </div>
+      <button class="auto-detail-buy">Comprar</button>
+    </div>
+  </div>
+</div>

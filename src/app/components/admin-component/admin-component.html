@@ -1,29 +1,45 @@
 
-<h2>Panel de Administración</h2>
-<button (click)="logout()">Logout</button>
 
-<section>
-	<form (ngSubmit)="buscarUsuario()">
-		<label for="cedula">Buscar usuario por cédula:</label>
-		<input id="cedula" name="cedula" [(ngModel)]="cedula">
-		<button type="submit">Buscar</button>
-	</form>
-
-	<div *ngIf="successMsg" style="color: green; margin-top: 10px;">
-		{{ successMsg }}
-	</div>
-	<div *ngIf="errorMsg" style="color: red; margin-top: 10px;">
-		{{ errorMsg }}
-	</div>
-
-	<div *ngIf="usuario && usuario.cedula">
-		<h3>Datos del usuario</h3>
-		<p><strong>Cédula:</strong> {{ usuario.cedula }}</p>
-		<p><strong>Nombre:</strong> {{ usuario.nombres }}</p>
-		<p><strong>Apellido:</strong> {{ usuario.apellidos }}</p>
-		<p><strong>Email:</strong> {{ usuario.email }}</p>
-		<p><strong>Teléfono:</strong> {{ usuario.telefono }}</p>
-		<p><strong>Red Social:</strong> {{ usuario.redSocial }}</p>
-		<button (click)="eliminarUsuario()">Eliminar usuario</button>
-	</div>
-</section>
+<div class="admin-layout">
+		<aside class="admin-sidebar">
+			<h2>Panel Admin</h2>
+			<nav class="admin-menu">
+				<button class="admin-menu-btn" [class.active]="showBuscarUsuario">Buscar usuario</button>
+				<!-- Aquí puedes agregar más opciones si lo deseas -->
+			</nav>
+			<div class="admin-sidebar-bottom">
+				<button class="admin-logout" (click)="logout()">Cerrar sesión</button>
+			</div>
+		</aside>
+	<main class="admin-main">
+		<form (ngSubmit)="buscarUsuario()" class="admin-search-form">
+			<label for="cedula">Buscar usuario por cédula:</label>
+			<input id="cedula" name="cedula" [(ngModel)]="cedula" placeholder="Cédula" required>
+			<button type="submit" class="admin-search-btn">Buscar</button>
+		</form>
+		<div *ngIf="successMsg" class="admin-success">{{ successMsg }}</div>
+		<div *ngIf="errorMsg" class="admin-error">{{ errorMsg }}</div>
+		<div *ngIf="usuario && usuario.cedula" class="admin-user-card">
+			<div class="admin-user-info">
+				<div class="admin-user-row"><strong>Cédula:</strong> {{ usuario.cedula }}</div>
+				<div class="admin-user-row"><strong>Nombre:</strong> {{ usuario.nombres }}</div>
+				<div class="admin-user-row"><strong>Apellido:</strong> {{ usuario.apellidos }}</div>
+				<div class="admin-user-row"><strong>Email:</strong> {{ usuario.email }}</div>
+				<div class="admin-user-row"><strong>Teléfono:</strong> {{ usuario.telefono }}</div>
+				<div class="admin-user-row"><strong>Red Social:</strong> {{ usuario.redSocial }}</div>
+			</div>
+			<button class="admin-delete-btn" (click)="eliminarUsuario()">
+				<span class="admin-trash-icon">
+					<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<rect x="6" y="8" width="12" height="10" rx="2" fill="#fff" stroke="#d32f2f" stroke-width="2"/>
+						<rect x="10" y="11" width="4" height="5" rx="1" fill="#d32f2f"/>
+						<rect x="9" y="4" width="6" height="3" rx="1.5" fill="#d32f2f"/>
+						<line x1="8" y1="8" x2="8" y2="18" stroke="#d32f2f" stroke-width="2"/>
+						<line x1="16" y1="8" x2="16" y2="18" stroke="#d32f2f" stroke-width="2"/>
+					</svg>
+				</span>
+				Eliminar usuario
+			</button>
+		</div>
+	</main>
+</div>

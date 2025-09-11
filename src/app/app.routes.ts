@@ -11,6 +11,8 @@ import { AutosDisponiblesComponent } from './components/autos-disponibles-compon
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'autosUsuario', loadComponent: () => import('./components/autos-usuario-component/autos-usuario-component').then(m => m.AutosUsuarioComponent) },
+  { path: 'auto/:id', loadComponent: () => import('./components/auto-detail-component/auto-detail-component').then(m => m.AutoDetailComponent) },
   { path: 'login', component: AuthComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'homeUser', component: UserComponent },

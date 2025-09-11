@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component, ChangeDetectorRef } from '@angular/core';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -30,20 +32,28 @@ export class AdminComponent {
       this.errorMsg = 'Ingresa una cédula para buscar.';
       return;
     }
-    this.adminService.getUserByCedula(this.cedula).subscribe({
-      next: (user) => {
-        this.usuario = user;
-        this.successMsg = 'Usuario encontrado.';
-        this.cedula = '';
-        this.cdr.markForCheck();
-      },
-      error: (err) => {
-        this.errorMsg = 'No se encontró el usuario o no tienes permisos.';
-        if (err?.error?.message === 'Usuario no encontrado' || err?.status === 404) {
-          this.usuario = null;
+    this.adminService.getUserByCedula(this.cedula)
+      .pipe(
+        catchError((err) => {
+          if (err?.error?.message === 'Usuario no encontrado' || err?.status === 404) {
+            this.usuario = null;
+            this.errorMsg = 'No existe usuario con esa cédula.';
+          } else {
+            this.usuario = null;
+            this.errorMsg = 'No se pudo buscar el usuario.';
+          }
+          this.cdr.markForCheck();
+          return of(null);
+        })
+      )
+      .subscribe((user) => {
+        if (user) {
+          this.usuario = user;
+          this.successMsg = 'Usuario encontrado.';
+          this.cedula = '';
         }
-      }
-    });
+        this.cdr.markForCheck();
+      });
   }
 
   eliminarUsuario() {
