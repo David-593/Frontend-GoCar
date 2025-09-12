@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegisterService, registerUserItf } from '../../services/register-service/register.service';
+import { RegisterService } from '../../services/register-service/register.service';
 
 import { RouterLink } from '@angular/router';
 
@@ -19,13 +19,25 @@ export class RegisterUserComponent {
   apellidos: string = '';
   email: string = '';
   password: string = '';
+  repeatPassword: string = '';
   telefono: string = '';
   redSocial: string = '';
   errorMsg: string = '';
+  successMsg: string = '';
+  passwordsMatch: boolean = true;
 
   constructor(private userService: RegisterService, private router: Router) { }
 
+  validatePasswords() {
+    this.passwordsMatch = this.password === this.repeatPassword;
+  }
+
   register() {
+    this.validatePasswords();
+    if (!this.passwordsMatch) {
+      this.errorMsg = 'Las contraseñas no coinciden.';
+      return;
+    }
     const newUser = {
       cedula: this.cedula,
       nombres: this.nombres,
@@ -38,13 +50,22 @@ export class RegisterUserComponent {
 
     this.userService.register(newUser).subscribe({
       next: (response) => {
-        console.log('User registered successfully:', response);
-        this.router.navigate(['/login']);
+        this.successMsg = 'Usuario creado correctamente.';
+        this.errorMsg = '';
+        alert('Usuario creado correctamente.');
       },
       error: (error) => {
-        console.error('Error registering user:', error);
+        this.errorMsg = 'Error al registrar usuario.';
+        this.successMsg = '';
       }
     });
   }
 
+  goToLogin() {
+    this.router.navigate(['/login']);
+  }
+
+  goToHome() {
+    this.router.navigate(['/']);
+  }
 }

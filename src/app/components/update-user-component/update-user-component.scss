@@ -1,0 +1,57 @@
+.update-user-form {
+	background: #fff !important;
+	color: #23272a !important;
+	border-radius: 12px;
+	box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+	padding: 2.5rem 2rem 2rem 2rem;
+	min-width: 320px;
+	max-width: 400px;
+	width: 100%;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	gap: 1.2rem;
+}
+.form-group {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+.form-group label {
+	color: #3949ab;
+	font-weight: 500;
+	margin-bottom: 0.3rem;
+	display: block;
+}
+.form-group input {
+	background: #fff;
+	color: #23272a;
+	border: 1px solid #3949ab;
+	border-radius: 6px;
+	padding: 10px;
+	width: 100%;
+	font-size: 1rem;
+}
+.update-btn {
+	background: #3949ab;
+	color: #fff;
+	border: none;
+	border-radius: 6px;
+	padding: 0.8rem 1.5rem;
+	font-weight: bold;
+	cursor: pointer;
+	font-size: 1.1rem;
+	box-shadow: 0 2px 8px #3949ab22;
+	transition: background 0.2s;
+}
+.update-btn:hover {
+	background: #283593;
+}
+.success-msg {
+	color: #388e3c;
+	margin-top: 0.5rem;
+}
+.error-msg {
+	color: #d32f2f;
+	margin-top: 0.5rem;
+}
